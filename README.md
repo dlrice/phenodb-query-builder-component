@@ -11,6 +11,8 @@ To start development server:
 yarn start
 ```
 
+## About
+This component is used in the PhenoDB as the interface for building queries.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
