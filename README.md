@@ -1,3 +1,17 @@
+## tl;dr
+To install packages after initial clone:
+
+```
+yarn
+```
+
+To start development server:
+
+```
+yarn start
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
