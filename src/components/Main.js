@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Section from './Section'
+import RaisedButton from 'material-ui/RaisedButton'
 
 
 // import './App.css'
@@ -7,9 +8,22 @@ import Section from './Section'
 
 class Main extends Component {
 
+  getStyle() {
+    return {
+      main: {
+        paddingLeft: '20%',
+        paddingRight: '20%',
+      },
+      searchButton: {
+        margin: 12,
+      }
+    }
+  }
+
   render() {
+    const style = this.getStyle()
     return (
-      <div>
+      <div style={style.main}>
         <Section
           title="FILTERS"
           onEditClicked={() => console.log('clicked!')}
@@ -29,6 +43,7 @@ class Main extends Component {
         >
           These components behave just like a React class with only a render method defined. Since no component instance is created for a functional component, any ref added to one will evaluate to null. Functional components do not have lifecycle methods, but you can set .propTypes and .defaultProps as properties on the function.
         </Section>
+        <RaisedButton label="SEARCH" primary={true} style={style.searchButton} />
       </div>
     )
   }

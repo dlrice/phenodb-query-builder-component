@@ -19,8 +19,6 @@ const Section = (props) => {
       textAlign: 'right',
     },
     card: {
-      marginLeft: '20%',
-      marginRight: '20%',
       marginTop: 15,
     },
   }
