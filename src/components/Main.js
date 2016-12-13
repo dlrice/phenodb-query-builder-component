@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Section from './Section'
+import FiltersSection from './FiltersSection'
 import RaisedButton from 'material-ui/RaisedButton'
 
 
@@ -24,13 +25,7 @@ class Main extends Component {
     const style = this.getStyle()
     return (
       <div style={style.main}>
-        <Section
-          title="FILTERS"
-          onEditClicked={() => console.log('clicked!')}
-        >
-          External source NOTTINGHAM must be TRUE AND <br/>
-          Phenotype Jewish ethnicity must not be null
-        </Section>
+        <FiltersSection />
         <Section
           title="RESULT ATTRIBUTES"
           onEditClicked={() => console.log('clicked!')}

@@ -13,10 +13,10 @@ const Section = (props) => {
     header: {
       backgroundColor: 'lightgrey',
       fontWeight: 'bold',
-      padding: 10,
+      padding: 7.5,
     },
     cardAction: {
-      textAlign: 'right',
+      textAlign: 'left',
     },
     card: {
       marginTop: 15,
