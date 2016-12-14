@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Section from './Section'
-import FiltersSection from './FiltersSection'
+import FilterSection from './FilterSection'
 import RaisedButton from 'material-ui/RaisedButton'
 
 
@@ -12,8 +12,8 @@ class Main extends Component {
   getStyle() {
     return {
       main: {
-        paddingLeft: '20%',
-        paddingRight: '20%',
+        paddingLeft: '5%',
+        paddingRight: '5%',
       },
       searchButton: {
         margin: 12,
@@ -25,7 +25,7 @@ class Main extends Component {
     const style = this.getStyle()
     return (
       <div style={style.main}>
-        <FiltersSection />
+        <FilterSection />
         <Section
           title="RESULT ATTRIBUTES"
           onEditClicked={() => console.log('clicked!')}

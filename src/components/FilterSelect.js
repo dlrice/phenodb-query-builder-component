@@ -11,26 +11,33 @@ import fetchSelectData from '../fetchSelectData'
 //   <MenuItem key={5} value={5} primaryText="Weekly" />,
 // ]
 
-const FilterSelect = ({selectIndex, previousChoice, handleSelect}) => {
+const FilterSelect = ({selectIndex, previousChoice, thisChoice, handleSelect}) => {
 
 
   // handleChange = (event, index, value) => this.setState({value})
 
-  console.log(previousChoice)
   console.log(selectIndex)
+  console.log(previousChoice)
+  
 
   const selectData = fetchSelectData(selectIndex, previousChoice)
-  console.log(selectData)
   const choices = selectData.get('choices')
-  const items = choices.map((k, v) => (
-    <MenuItem key={k} value={k} primaryText={v} />
-  )).toArray()
+  const items = choices.map((c) => {
+    return (
+      <MenuItem
+        key={c.get('pk')}
+        value={c.get('pk')}
+        primaryText={c.get('name')}
+      />
+    )
+  })
   
+  console.log('thisChoice', thisChoice)
   return (
-    <div>
+    <div style={{paddingRight: 10}}>
       <SelectField
-        // value={this.state.value}
-        //onChange={(v) => handleSelect(v, selectIndex)}
+        style={{width: 200}}
+        value={thisChoice > -1 ? thisChoice : undefined}
         onChange={(e,v) => handleSelect(v)}
         floatingLabelText={selectData.get('title')}
       >

@@ -3,12 +3,24 @@ import { List, Map, fromJS } from 'immutable'
 
 const nullChoices = fromJS({
   title: 'Filter on',
-  choices: {
-    phenotype: 'Phenotype', 
-    platform: 'Platform', 
-    study: 'Study', 
-    source: 'External Source',
-  }
+  choices: [
+    {
+      pk: 0,
+      name: 'Phenotype',
+    },
+    {
+      pk: 1,
+      name: 'Platform',
+    },
+    {
+      pk: 2,
+      name: 'Study',
+    },
+    {
+      pk: 3,
+      name: 'External Source',
+    },
+  ]
 })
 
 let cache = Map()
@@ -27,6 +39,7 @@ function fetchSelectData(selectIndex, previousChoice) {
   } else {
     // Fetch from server
     console.log('fetch from server')
+    return cache.get(List([0,0]))
   }
 }
 
