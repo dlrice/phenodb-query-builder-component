@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import { List, Map, fromJS } from 'immutable'
 
-const firstChoices = fromJS({
+const nullChoices = fromJS({
   title: 'Filter on',
   choices: {
     phenotype: 'Phenotype', 
@@ -12,15 +12,15 @@ const firstChoices = fromJS({
 })
 
 let cache = Map()
-cache = cache.set(List([0,'root']), firstChoices)
+cache = cache.set(List([0,0]), nullChoices)
 
-function fetchSelectData(depth, choice) {
+function fetchSelectData(selectIndex, previousChoice) {
 
   console.log('here!')
-  console.log(depth)
-  console.log(choice)
+  console.log(selectIndex)
+  console.log(previousChoice)
   console.log(cache.toJS())
-  const k = List([depth, choice])
+  const k = List([selectIndex, previousChoice])
   if (cache.has(k)) {
     // Already in local cache
     return cache.get(k)

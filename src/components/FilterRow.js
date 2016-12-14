@@ -2,17 +2,21 @@ import React, { Component } from 'react'
 import { MenuItem, SelectField } from 'material-ui'
 import FilterSelect from './FilterSelect'
 
-const FilterRow = ({depth, choice}) => {
+const FilterRow = ({choices, handleSelect, rowIndex}) => {
 
   console.log('here')
-  console.log(choice)
-  console.log(depth)
+  console.log(choices)
   // handleChange = (event, index, value) => this.setState({value})
-  // let filterSelectNodes
-  // if (choice.size === 1)
-  //   filterSelectNodes = <FilterSelect depth={depth} choice={'root'} key={0} />
-  // else
-  let filterSelectNodes = choice.map((c, i) => <FilterSelect depth={i} choice={c} key={i} />)
+  let filterSelectNodes = choices.map((c, i) => (
+      <FilterSelect
+        selectIndex={i}
+        previousChoice={c}
+        key={i}
+        handleSelect={(v) => handleSelect(i, v)}
+      />
+    )
+  )
+
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {filterSelectNodes}

@@ -11,15 +11,16 @@ import fetchSelectData from '../fetchSelectData'
 //   <MenuItem key={5} value={5} primaryText="Weekly" />,
 // ]
 
-const FilterSelect = ({depth, choice}) => {
+const FilterSelect = ({selectIndex, previousChoice, handleSelect}) => {
 
 
   // handleChange = (event, index, value) => this.setState({value})
 
-  console.log(choice)
-  console.log(depth)
+  console.log(previousChoice)
+  console.log(selectIndex)
 
-  const selectData = fetchSelectData(depth, choice)
+  const selectData = fetchSelectData(selectIndex, previousChoice)
+  console.log(selectData)
   const choices = selectData.get('choices')
   const items = choices.map((k, v) => (
     <MenuItem key={k} value={k} primaryText={v} />
@@ -29,7 +30,8 @@ const FilterSelect = ({depth, choice}) => {
     <div>
       <SelectField
         // value={this.state.value}
-        // onChange={this.handleChange}
+        //onChange={(v) => handleSelect(v, selectIndex)}
+        onChange={(e,v) => handleSelect(v)}
         floatingLabelText={selectData.get('title')}
       >
         {items}

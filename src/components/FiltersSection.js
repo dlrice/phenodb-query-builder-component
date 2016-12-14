@@ -12,8 +12,11 @@ import FilterRow from './FilterRow'
 class FiltersSection extends Component {
 
   constructor(props) {
+    let initialRows = List()
+    let initialSelect = List([0])
+    initialRows = initialRows.push(initialSelect)
     super(props)
-    this.state = {chosen: fromJS([['root']])}
+    this.state = {chosen: initialRows}
   }
 
 
@@ -21,12 +24,23 @@ class FiltersSection extends Component {
     console.log('add')
   }
 
+
+  handleSelect(rowIndex, selectIndex, v) {
+    console.log(rowIndex, selectIndex, v)
+  }
+
   render() {
     const style = this.getStyles()
     const chosen = this.state.chosen
     console.log(chosen.toJS())
-    let filterNodes = chosen.map((c, i) => <FilterRow choice={c} depth={i} key={i}/>)
-
+    let filterNodes = chosen.map((c, i) => (
+      <FilterRow
+        choices={c}
+        key={i}
+        rowIndex={i}
+        handleSelect={(selectIndex, v) => this.handleSelect(selectIndex, i, v)}
+      />
+    ))
     return (
       <Card style={style.card}>
         <CardHeader
