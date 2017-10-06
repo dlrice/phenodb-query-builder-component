@@ -4,11 +4,13 @@ import QuerySection from '../components/QuerySection'
 import { updateQuery } from '../actions'
 
 const getSelectionOptions = (choiceRows, optionsCache) => {
-  return choiceRows.map((choiceRow) => {
-    if (choiceRow.length === 0)
-      return [optionsCache.root]
-    return [optionsCache.root]
-  })
+  return choiceRows.map((choiceRow) => (
+    choiceRow.map((choice) => {
+      if (!choice)
+        return optionsCache.root
+      return optionsCache.root
+    })
+  ))
 }
 
 const mapStateToProps = state => {

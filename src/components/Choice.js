@@ -1,12 +1,19 @@
 // @flow weak
-
 import React from 'react'
 import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
+import { withStyles } from 'material-ui/styles';
 
 
-const Choice = ({options, chosen='', title=null, handleSelection}) => {
+const styles = theme => ({
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+});
+
+const Choice = ({options, chosen='', title=null, handleSelection, classes}) => {
   
   const onChange = event => {
     handleSelection(event.target.value)
@@ -19,7 +26,7 @@ const Choice = ({options, chosen='', title=null, handleSelection}) => {
   ))
 
   return (
-    <FormControl>
+    <FormControl className={classes.formControl}>
       { !!title ? <InputLabel htmlFor="age-native-simple">{title}</InputLabel> : null }
       <Select
         native
@@ -34,4 +41,4 @@ const Choice = ({options, chosen='', title=null, handleSelection}) => {
   )
 }
 
-export default Choice
+export default withStyles(styles)(Choice)

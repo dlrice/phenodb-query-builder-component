@@ -6,17 +6,19 @@ import { withStyles } from 'material-ui/styles';
 import Choice from './Choice'
 
 
-const styles = {
-  main: {
+const styles = theme => ({
+  container: {
     backgroundColor: '#D5DBDB',
     borderWidth: 0.5,
     borderColor: 'black',
     borderStyle: 'solid',
     padding: 5,
-  }
-}
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+});
 
-const QueryRow = ({selectDataRow, choiceRow, handleSelection}) => {
+const QueryRow = ({selectDataRow, choiceRow, handleSelection, classes}) => {
   console.log(selectDataRow)
   const choiceNodes = selectDataRow.map((selectData, colIndex) => (
     <Choice
@@ -29,7 +31,7 @@ const QueryRow = ({selectDataRow, choiceRow, handleSelection}) => {
   ))
 
   return (
-    <div style={styles.main}>
+    <div className={classes.container}>
       {choiceNodes}
     </div>
   )
