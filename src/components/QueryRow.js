@@ -1,9 +1,12 @@
 // @flow weak
-
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import { CircularProgress } from 'material-ui/Progress'
 import Choice from './Choice'
+import TextInput from './TextInput'
+
+
 
 
 const styles = theme => ({
@@ -18,17 +21,35 @@ const styles = theme => ({
   },
 });
 
-const QueryRow = ({selectDataRow, choiceRow, handleSelection, classes}) => {
+const QueryRow = ({selectDataRow, choiceRow, handleInput, classes}) => {
   console.log(selectDataRow)
-  const choiceNodes = selectDataRow.map((selectData, colIndex) => (
-    <Choice
-      key={colIndex}
-      options={selectData.options}
-      chosen={choiceRow[colIndex]}
-      title={selectData.title}
-      handleSelection={(value) => handleSelection(colIndex, value)}
-    />    
-  ))
+  let {choices, max_n_choices} = choiceRow
+  const choiceNodes = selectDataRow.map((selectData, colIndex) => {
+    console.log(colIndex)
+    if (colIndex === 3) {
+      return (
+        <TextInput
+          key={colIndex}
+          value={choices[colIndex]}
+          handleInput={(value) => handleInput(colIndex, value)}
+        />
+      )
+    } else if (!selectData) {
+      return (
+        <CircularProgress key={colIndex} />
+      )
+    } else {
+      return (
+        <Choice
+          key={colIndex}
+          options={selectData.options}
+          chosen={choices[colIndex]}
+          title={selectData.title}
+          handleInput={(value) => handleInput(colIndex, value)}
+        />
+      )
+    }
+  })
 
   return (
     <div className={classes.container}>

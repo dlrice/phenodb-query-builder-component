@@ -11,6 +11,8 @@
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "uid-safe": "^2.1.5",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {

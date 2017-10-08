@@ -13,13 +13,11 @@ const styles = theme => ({
   },
 });
 
-const Choice = ({options, chosen='', title=null, handleSelection, classes}) => {
+const Choice = ({options, chosen='', title='', handleInput, classes}) => {
   
   const onChange = event => {
-    handleSelection(event.target.value)
+    handleInput(event.target.value)
   }
-  console.log(options)
-  console.log(chosen)
 
   const items = options.map((c, i) => (
       <option value={c.value} key={i}>{c.name}</option>
@@ -27,7 +25,7 @@ const Choice = ({options, chosen='', title=null, handleSelection, classes}) => {
 
   return (
     <FormControl className={classes.formControl}>
-      { !!title ? <InputLabel htmlFor="age-native-simple">{title}</InputLabel> : null }
+      <InputLabel htmlFor="age-native-simple">{title}</InputLabel>
       <Select
         native
         value={chosen}

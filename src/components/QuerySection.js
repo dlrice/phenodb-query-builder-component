@@ -16,13 +16,13 @@ const styles = theme => ({
   }),
 });
 
-const QuerySection = ({choiceRows, selectDataRows, handleSelection}) => {
+const QuerySection = ({choiceRows, selectDataRows, handleInput}) => {
   const queryRows = choiceRows.map((choiceRow, rowIndex) => (
     <QueryRow 
       key={rowIndex}
       selectDataRow={selectDataRows[rowIndex]}
       choiceRow={choiceRow}
-      handleSelection={(colIndex, choice) => handleSelection(rowIndex, colIndex, choice)}
+      handleInput={(colIndex, choice) => handleInput(rowIndex, colIndex, choice)}
     />
   ))
 
