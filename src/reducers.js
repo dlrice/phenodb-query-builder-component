@@ -1,9 +1,22 @@
 import { cloneDeep, includes } from 'lodash'
-import { ADD_QUERY_ROW, UPDATE_CHOICE_ROW, RECEIVE_QUERY_SELECT_DATA } from './actions.js'
-import { parseIncomingSelectData, containsNull, isBooleanType } from './utils'
+import { 
+  ADD_QUERY_ROW,
+  UPDATE_CHOICE_ROW,
+  RECEIVE_QUERY_SELECT_DATA,
+  DELETE_QUERY_ROW,
+  UPDATE_CONJUNCTION,
+} from './actions.js'
+import {
+  parseIncomingSelectData,
+  containsNull,
+  isBooleanType
+} from './utils'
 
+const defaultChoiceRow = {choices:[''], max_n_choices: 3}
+const defaultConjunction = 'and'
 const defaultState = {
-  choiceRows: [{choices:[''], max_n_choices: 3}],
+  choiceRows: [defaultChoiceRow],
+  conjunctions: [],
   optionsCache: {
     root: {
       title: 'Filter on',
@@ -30,6 +43,7 @@ const defaultState = {
 }
 
 const queryApp = (state = defaultState, action) => {
+  console.log(action)
   if (action.type === UPDATE_CHOICE_ROW) {
     let { rowIndex, colIndex, value } = action
     let { choiceRows, optionsCache } = state
@@ -71,6 +85,39 @@ const queryApp = (state = defaultState, action) => {
     incoming = parseIncomingSelectData(incoming, key)
     optionsCache[key] = incoming
     return { ...state, optionsCache}
+  } else if (action.type === ADD_QUERY_ROW) {
+    let { choiceRows, conjunctions } = state
+    choiceRows = choiceRows.concat([defaultChoiceRow])
+    conjunctions = conjunctions.concat([defaultConjunction])
+    console.log(choiceRows)
+    return { ...state, choiceRows, conjunctions}
+  } else if (action.type === DELETE_QUERY_ROW) {
+    let { rowIndex } = action
+    let { choiceRows, conjunctions } = state
+    if ((rowIndex === 0) && (choiceRows.length === 1)) {
+      return {
+        ...state,
+        choiceRows: [defaultChoiceRow],
+        conjunctions: [],
+      }
+    }
+    return { ...state,
+      choiceRows:[
+        ...choiceRows.slice(0, rowIndex),
+        ...choiceRows.slice(rowIndex + 1),
+      ],
+      conjunctions:[
+        ...conjunctions.slice(0, rowIndex - 1),
+        ...conjunctions.slice(rowIndex),
+      ],
+    }
+  } else if (action.type === UPDATE_CONJUNCTION) {
+    let { index, value } = action
+    console.log(index, value)
+    let { conjunctions } = state
+    conjunctions = cloneDeep(conjunctions)
+    conjunctions[index] = value
+    return { ...state, conjunctions }
   } else {
     return state
   }

@@ -38,5 +38,5 @@ export function containsNull(x) {
 export function isBooleanType(phenotypeValue, optionsCache) {
   phenotypeValue = Number(phenotypeValue)
   let entry = optionsCache.phenotype.options.filter(x => x.value === phenotypeValue)
-  return entry[0].phenotype_type == 3
+  return entry[0].phenotype_type === 3
 }

@@ -3,25 +3,39 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import { CircularProgress } from 'material-ui/Progress'
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
 import Choice from './Choice'
 import TextInput from './TextInput'
-
-
-
+import Conjunction from './Conjunction'
 
 const styles = theme => ({
   container: {
     backgroundColor: '#D5DBDB',
     borderWidth: 0.5,
-    borderColor: 'black',
+    borderColor: 'white',
     borderStyle: 'solid',
-    padding: 5,
+    padding: 3,
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginTop: 1,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  deleteButton: {
+    marginLeft: 'auto',
+    margin: theme.spacing.unit,
+  },
+  conjunction: {
+    padding: 0,
+    margin: 0,
     display: 'flex',
     flexWrap: 'wrap',
   },
 });
 
-const QueryRow = ({selectDataRow, choiceRow, handleInput, classes}) => {
+const QueryRow = ({selectDataRow, choiceRow, handleInput, classes, handleDeleteClick, handleConjunction}) => {
   console.log(selectDataRow)
   let {choices, max_n_choices} = choiceRow
   const choiceNodes = selectDataRow.map((selectData, colIndex) => {
@@ -52,8 +66,16 @@ const QueryRow = ({selectDataRow, choiceRow, handleInput, classes}) => {
   })
 
   return (
-    <div className={classes.container}>
-      {choiceNodes}
+    <div>
+      <div className={classes.container}>
+        {choiceNodes}
+        <IconButton
+          className={classes.deleteButton}
+          onClick={()=> handleDeleteClick()}
+          aria-label="Delete">
+          <DeleteIcon />
+        </IconButton>
+      </div>
     </div>
   )
 }

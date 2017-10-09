@@ -5,6 +5,9 @@ export const ADD_QUERY_ROW = 'ADD_QUERY_ROW'
 export const UPDATE_CHOICE_ROW = 'UPDATE_CHOICE_ROW'
 export const RECEIVE_QUERY_SELECT_DATA = 'RECEIVE_QUERY_SELECT_DATA'
 export const REQUEST_QUERY_SELECT_DATA = 'REQUEST_QUERY_SELECT_DATA'
+export const DELETE_QUERY_ROW = 'DELETE_QUERY_ROW'
+export const UPDATE_CONJUNCTION = 'UPDATE_CONJUNCTION'
+
 
 
 export function updateQuery(rowIndex, colIndex, value) {
@@ -19,7 +22,7 @@ export function updateQuery(rowIndex, colIndex, value) {
 function requestQuerySelectData(path) {
   return {
     type: REQUEST_QUERY_SELECT_DATA,
-    path
+    path,
   }
 }
 
@@ -28,6 +31,27 @@ function receiveQuerySelectData(key, incoming) {
     type: RECEIVE_QUERY_SELECT_DATA,
     key,
     incoming,
+  }
+}
+
+export function updateConjunction(index, value) {
+  return {
+    type: UPDATE_CONJUNCTION,
+    index,
+    value,
+  }
+}
+
+export function addQueryRow() {
+  return {
+    type: ADD_QUERY_ROW,
+  }
+}
+
+export function deleteRow(rowIndex) {
+  return {
+    type: DELETE_QUERY_ROW,
+    rowIndex,
   }
 }
 

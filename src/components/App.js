@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Typography from 'material-ui/Typography'
 import Query from '../containers/Query'
+import OutputCard from './OutputCard'
 
 const styles = {
   main: {
@@ -15,9 +16,18 @@ class App extends Component {
     return (
       <div style={styles.main}>
         <Typography type="headline" component="h1">
-          Query
+          Build Query
         </Typography>
         <Query />
+
+        <Typography type="headline" component="h1">
+          Select Output
+        </Typography>
+        <OutputCard /> <OutputCard />
+
+        <Typography type="headline" component="h1">
+          Select Search Space
+        </Typography>
       </div>
     )
   }

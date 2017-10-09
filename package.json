@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "lodash": "^4.17.4",
-    "material-ui": "next",
+    "material-ui": "^1.0.0-beta.13",
+    "material-ui-icons": "^1.0.0-beta.15",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",

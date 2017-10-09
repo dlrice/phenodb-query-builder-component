@@ -1,7 +1,13 @@
 // @flow weak
 import { connect } from 'react-redux'
 import QuerySection from '../components/QuerySection'
-import { updateQuery, fetchQuerySelectDataIfNeeded } from '../actions'
+import {
+  updateQuery,
+  fetchQuerySelectDataIfNeeded,
+  addQueryRow,
+  deleteRow,
+  updateConjunction,
+} from '../actions'
 import { getQuerySelectDataKey } from '../utils'
 
 const getSelectionOptions = (choiceRows, optionsCache) => {
@@ -22,6 +28,7 @@ const mapStateToProps = state => {
   return {
     selectDataRows: getSelectionOptions(state.choiceRows, state.optionsCache),
     choiceRows: state.choiceRows,
+    conjunctions: state.conjunctions,
   }
 }
 
@@ -30,7 +37,11 @@ const mapDispatchToProps = dispatch => (
     handleInput: (rowIndex, colIndex, choice) => {
       dispatch(updateQuery(rowIndex, colIndex, choice))
       dispatch(fetchQuerySelectDataIfNeeded(rowIndex, colIndex, choice))
-    }
+    },
+    handleAddClick: () => dispatch(addQueryRow()),
+    handleDeleteClick: (rowIndex) => dispatch(deleteRow(rowIndex)),
+    handleConjunction: (index, value) => dispatch(updateConjunction(index, value))
+    
   }
 )
 
