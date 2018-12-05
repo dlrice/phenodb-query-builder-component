@@ -58,4 +58,4 @@ const QuerySection = ({choiceRows, selectDataRows, handleInput, classes, handleA
 }
 
 
-export default withStyles(styles)(QuerySection);
+export default withStyles(styles)(QuerySection)

@@ -40,3 +40,14 @@ export function isBooleanType(phenotypeValue, optionsCache) {
   let entry = optionsCache.phenotype.options.filter(x => x.value === phenotypeValue)
   return entry[0].phenotype_type === 3
 }
+
+export function parseIncomingOutputOptionData(incoming, id) {
+  let nameKey = `${id}_name`
+  return incoming.map((x) => (
+    {
+      text: x['fields'][nameKey],
+      value: `${id}:${x.pk}`,
+      selected: false,
+    }
+  ))
+}

@@ -7,8 +7,18 @@ export const RECEIVE_QUERY_SELECT_DATA = 'RECEIVE_QUERY_SELECT_DATA'
 export const REQUEST_QUERY_SELECT_DATA = 'REQUEST_QUERY_SELECT_DATA'
 export const DELETE_QUERY_ROW = 'DELETE_QUERY_ROW'
 export const UPDATE_CONJUNCTION = 'UPDATE_CONJUNCTION'
+export const RECEIVE_OUTPUT_OPTION_DATA = 'RECEIVE_OUTPUT_OPTION_DATA'
+export const UPDATE_OUTPUT_CHECKED = 'UPDATE_OUTPUT_CHECKED'
+export const HANDLE_SELECT_ALL = 'HANDLE_SELECT_ALL'
+export const UPDATE_SEARCH_SPACE_NAME = 'UPDATE_SEARCH_SPACE_NAME'
+export const SUBMIT = 'SUBMIT'
 
 
+export function submit() {
+  return {
+    type: SUBMIT
+  }
+}
 
 export function updateQuery(rowIndex, colIndex, value) {
   return {
@@ -34,6 +44,21 @@ function receiveQuerySelectData(key, incoming) {
   }
 }
 
+function receiveOutputOptionData(id, incoming) {
+  return {
+    type: RECEIVE_OUTPUT_OPTION_DATA,
+    id,
+    incoming,
+  }
+}
+
+export function updateSearchSpaceName(searchSpaceName) {
+  return {
+    type: UPDATE_SEARCH_SPACE_NAME,
+    searchSpaceName,
+  }
+}
+
 export function updateConjunction(index, value) {
   return {
     type: UPDATE_CONJUNCTION,
@@ -48,10 +73,27 @@ export function addQueryRow() {
   }
 }
 
+export function handleSelectAll(sectionName, checked) {
+  return {
+    type: HANDLE_SELECT_ALL,
+    sectionName,
+    checked
+  }
+}
+
 export function deleteRow(rowIndex) {
   return {
     type: DELETE_QUERY_ROW,
     rowIndex,
+  }
+}
+
+export function handleCheckboxClick(sectionName, checkboxValue, checked) {
+  return {
+    type: UPDATE_OUTPUT_CHECKED,
+    sectionName,
+    checkboxValue,
+    checked,
   }
 }
 
@@ -73,6 +115,27 @@ function fetchQuerySelectData(key) {
     return fetch(URL)
       .then(response => response.json())
       .then(json => dispatch(receiveQuerySelectData(key, json)))
+  }
+}
+
+function shouldFetchOutputOptionData(state, id) {
+  return !state.outputOptions.hasOwnProperty(id)
+}
+
+function fetchOutputOptionData(id) {
+  return dispatch => {
+    URL = `http://localhost:8000/querybuilder/${id}/all_json_models/`
+    return fetch(URL)
+      .then(response => response.json())
+      .then(json => dispatch(receiveOutputOptionData(id, json)))
+  }
+}
+
+export function fetchOutputOptionDataIfNeeded(id) {
+  return (dispatch, getState) => {
+    if (shouldFetchOutputOptionData(getState(), id)) {
+      return dispatch(fetchOutputOptionData(id))
+    }
   }
 }
 
@@ -101,28 +164,4 @@ export function fetchQuerySelectDataIfNeeded(rowIndex, colIndex, choice) {
     }
   }
 }
-
-
-/**
-
-phenotype:
-  root: {}
-  1: {}
-  2: {}
-  3: {}
-study:
-  root: {}
-
-
-http://localhost:8000/querybuilder/phenotype/all_json_models/
-
-
-http://localhost:8000/querybuilder/study/3/all_search_options/
-http://localhost:8000/querybuilder/study/1/all_search_options/
-http://localhost:8000/querybuilder/source/19/all_search_options/
-
-
-let path = ['phenotype', '1']
-let URL = `querybuilder/${path[0]}/${path[1]}/all_search_options/`
-
-**/
+  

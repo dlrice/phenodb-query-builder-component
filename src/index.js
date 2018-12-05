@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import queryApp from './reducers'
 import App from './components/App'
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 
 // Logger with default options
@@ -19,4 +19,4 @@ render(
   </Provider>,
   document.getElementById('root')
 )
-registerServiceWorker()
+// registerServiceWorker()
